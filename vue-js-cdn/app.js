@@ -11,6 +11,7 @@ const app = new Vue({
       { name: "Pao", payment: 18 },
       { name: "Jhon", payment: 19 },
       { name: "Kevin", payment: 25 },
+      { name: "Dome", payment: 20 },
     ],
     sendHTML: "<h1>By App</h1>",
     status: false,
