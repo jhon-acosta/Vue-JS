@@ -1,7 +1,6 @@
- #MEVN
- 
- *SERVER => MEVN: MOONGO_DB - EXPRESS - VUE JS - NODE JS
+## Enviroment
 
- *CLIENT => VUE JS
+```python
+import MEAVN -> Mongo Database, Express, Vue.js, Node.js
 
-
+```
