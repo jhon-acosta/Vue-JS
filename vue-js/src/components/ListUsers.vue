@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       title: "LISTADO DE USUARIOS",
-      users: {},
+      allData: [],
     };
   },
   methods: {
@@ -51,7 +51,7 @@ export default {
       await axios
         .get(`${URL}/users`)
         .then((response) => {
-          this.users = response;
+          this.allData = response.data.data;
         })
         .catch((err) => {
           console.log(err);
