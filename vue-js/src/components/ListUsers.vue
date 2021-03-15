@@ -45,7 +45,7 @@ export default {
         .get(`${URL}/users`)
         .then((response) => {
           this.allData = response.data.data;
-          console.log(this.allData);
+          // console.log(this.allData);
         })
         .catch((error) => {
           console.log(error);
