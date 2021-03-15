@@ -1,19 +1,15 @@
 const express = require("express");
-const morgan = require("morgan");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-require("./src/config/database");
+const conectDB = require("./config/db");
+const routes = require("./routes/routes");
 
 const app = express();
 
-app.set("Port", 4000);
-app.use(morgan("dev"));
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json())
+conectDB();
 
-//Routes
-app.use("/api/", require("./src/routes/test.route"));
+app.use(express.json());
 
-app.listen(app.get("Port"), () => {
-  console.log(`Running on PORT`, app.get("Port"));
+app.use("/api", routes);
+
+app.listen(4000, () => {
+  console.log(`Serve on PORT 4000`);
 });
