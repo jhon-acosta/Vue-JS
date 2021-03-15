@@ -1,8 +1,9 @@
 <template>
-  <div class="flex w-1/2 items-center justify-center p-5">
+  <div
+    class="flex w-1/2 items-center justify-center p-5 bg-gray-100 shadow-2xl border"
+  >
     <div>
       <h1 class="text-center">{{ title }}</h1>
-
       <table class="table-fixed border-2">
         <thead>
           <tr>
