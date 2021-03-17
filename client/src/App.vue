@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex h-20 items-center shadow-lg">
+    <div class="flex h-20 items-center shadow-2xl border-b-2 border-red-700">
       <div class="w-1/5">
         Logo
       </div>
