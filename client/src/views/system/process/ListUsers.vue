@@ -69,13 +69,20 @@
         </tr>
       </tbody>
     </table>
-    <CreateUsers :showModal="showModal" @onClose="handleClose" />
+    <CreateUsers
+      v-on:close="handleClose($event)"
+      v-on:getNewData="handleUsers($event)"
+      :showModal="showModal"
+      :urlAPI="urlAPI"
+      v-bind:allUsers="data"
+    />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import CreateUsers from "./CreateUsers";
+
 export default {
   name: "Home",
   components: {
@@ -106,12 +113,16 @@ export default {
           console.log(error);
         });
     },
+    handleClose(showModal) {
+      this.showModal = showModal;
+    },
+    handleUsers(newData) {
+      this.data = newData;
+    },
   },
-  handleClose() {
-    this.showModal = false;
-  },
-  created() {
+  mounted() {
     this.getUser();
+    // this.handleUsers();
   },
 };
 </script>
