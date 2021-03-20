@@ -7,7 +7,7 @@
       <div class="flex items-center justify-center w-4/5">
         <router-link to="/" class="px-2">INICIO</router-link>
         <router-link to="/user-registration" class="px-2"
-          > LISTADO DE USUARIOS
+          > LISTADO DE USUARIOS 
         </router-link>
       </div>
     </div>
