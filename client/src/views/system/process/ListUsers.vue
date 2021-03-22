@@ -77,10 +77,12 @@
         @close="handleClose($event)"
         @getNewData="handleUsers($event)"
         @userEmpty="handleUserEmpty($event)"
+        @chageTitles="handleChangeTitles($event)"
         :showModal="showModal"
         :urlAPI="urlAPI"
         :allUsers="data"
         :userToUpdata="userToUpdata"
+        :dinamicsTitles="dinamicsTitles"
       />
     </div>
   </div>
@@ -103,12 +105,17 @@ export default {
       urlAPI: "https://arcade-game-v2.herokuapp.com/api",
       data: [],
       userToUpdata: {
+        id:"",
         name: "",
         lastname: "",
         nickname: "",
         age: "",
         email: "",
         password: "",
+      },
+      dinamicsTitles:{
+        titleModal:"REGISTRAR USUARIO",
+        titleButton:"AGREGAR"
       },
       showModal: false,
     };
@@ -130,6 +137,10 @@ export default {
     sendUserUpdate(data) {
       this.userToUpdata = data;
       this.showModal = true;
+      this.dinamicsTitles= {
+        titleModal:"ACTUALIZAR USUARIO",
+        titleButton:"ACTUALIZAR"
+      }
       // console.log(this.userToUpdata);
     },
     handleClose(showModal) {
@@ -140,6 +151,9 @@ export default {
     },
     handleUserEmpty(object){
       this.userToUpdata = object;
+    },
+    handleChangeTitles(object){
+      this.dinamicsTitles = object
     }
   },
 };

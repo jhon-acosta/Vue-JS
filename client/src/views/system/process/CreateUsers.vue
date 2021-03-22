@@ -108,7 +108,7 @@
             class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-700 hover:text-green-700 text-base font-medium text-white hover:bg-white hover:border-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-700 sm:ml-3 sm:w-auto sm:text-sm"
             v-on:click="postUpdate"
           >
-            Guardar
+            {{ nameButton }}
           </button>
           <button
             type="button"
@@ -142,29 +142,31 @@ export default {
     urlAPI: String,
     allUsers: Array,
     userToUpdata: Object,
+    dinamicsTitles: Object,
   },
   beforeUpdate() {
     this.user = this.userToUpdata;
     this.idToUpdate = this.userToUpdata.id;
-    
+    this.titleModal = this.dinamicsTitles.titleModal;
+    this.nameButton = this.dinamicsTitles.titleButton;
   },
   data() {
     return {
       user: initialUser,
       idToUpdate: "",
-      titleModal: "REGISTRAR USUARIO",
+      titleModal: "",
+      nameButton: "",
     };
   },
   methods: {
     postUpdate() {
-      if (this.idToUpdate == undefined) {
+      if (this.idToUpdate == "") {
         this.postUser();
       } else {
         this.updateUser();
       }
     },
     async postUser() {
-      
       await axios
         .post(`${this.urlAPI}/user`, this.user)
         .then((response) => {
@@ -192,6 +194,10 @@ export default {
     closeModal() {
       this.$emit("close", false); //Change value child to parend type-boolean
       this.$emit("userEmpty", initialUser);
+      this.$emit("chageTitles", {
+        titleModal: "REGISTRAR USUARIO",
+        titleButton: "AGREGAR",
+      });
     },
     sendNewData(newData) {
       this.$emit("getNewData", newData); //Change value child to parend type-array
