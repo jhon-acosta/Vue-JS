@@ -105,7 +105,7 @@ export default {
       urlAPI: "https://arcade-game-v2.herokuapp.com/api",
       data: [],
       userToUpdata: {
-        id:"",
+        id: "",
         name: "",
         lastname: "",
         nickname: "",
@@ -113,9 +113,9 @@ export default {
         email: "",
         password: "",
       },
-      dinamicsTitles:{
-        titleModal:"REGISTRAR USUARIO",
-        titleButton:"AGREGAR"
+      dinamicsTitles: {
+        titleModal: "REGISTRAR USUARIO",
+        titleButton: "AGREGAR",
       },
       showModal: false,
     };
@@ -137,10 +137,10 @@ export default {
     sendUserUpdate(data) {
       this.userToUpdata = data;
       this.showModal = true;
-      this.dinamicsTitles= {
-        titleModal:"ACTUALIZAR USUARIO",
-        titleButton:"ACTUALIZAR"
-      }
+      this.dinamicsTitles = {
+        titleModal: "ACTUALIZAR USUARIO",
+        titleButton: "ACTUALIZAR",
+      };
       // console.log(this.userToUpdata);
     },
     handleClose(showModal) {
@@ -149,12 +149,12 @@ export default {
     handleUsers(newData) {
       this.data = newData;
     },
-    handleUserEmpty(object){
+    handleUserEmpty(object) {
       this.userToUpdata = object;
     },
-    handleChangeTitles(object){
-      this.dinamicsTitles = object
-    }
+    handleChangeTitles(object) {
+      this.dinamicsTitles = object;
+    },
   },
 };
 </script>
