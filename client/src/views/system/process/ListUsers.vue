@@ -76,6 +76,7 @@
       <CreateUsers
         @close="handleClose($event)"
         @getNewData="handleUsers($event)"
+        @userEmpty="handleUserEmpty($event)"
         :showModal="showModal"
         :urlAPI="urlAPI"
         :allUsers="data"
@@ -93,6 +94,9 @@ export default {
   name: "Home",
   components: {
     CreateUsers,
+  },
+  mounted() {
+    this.getUser();
   },
   data() {
     return {
@@ -134,10 +138,9 @@ export default {
     handleUsers(newData) {
       this.data = newData;
     },
-  },
-  mounted() {
-    this.getUser();
-    // this.handleUsers();
+    handleUserEmpty(object){
+      this.userToUpdata = object;
+    }
   },
 };
 </script>

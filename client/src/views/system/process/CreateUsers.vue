@@ -125,6 +125,17 @@
 
 <script>
 import axios from "axios";
+
+const initialUser = {
+  id: "",
+  name: "",
+  lastname: "",
+  nickname: "",
+  age: "",
+  email: "",
+  password: "",
+};
+
 export default {
   props: {
     showModal: Boolean,
@@ -135,23 +146,11 @@ export default {
   beforeUpdate() {
     this.user = this.userToUpdata;
     this.idToUpdate = this.userToUpdata.id;
-    if(this.idToUpdate !== undefined){
-    this.titleModal = "ACTUALIZAR USUARIO";
-    }else{
-      this.titleModal = "REGISTRAR USUARIO";
-    }
-
+    
   },
   data() {
     return {
-      user: {
-        name: "",
-        lastname: "",
-        nickname: "",
-        age: "",
-        email: "",
-        password: "",
-      },
+      user: initialUser,
       idToUpdate: "",
       titleModal: "REGISTRAR USUARIO",
     };
@@ -165,13 +164,14 @@ export default {
       }
     },
     async postUser() {
-      this.titleModal = "REGISTRAR";
+      
       await axios
         .post(`${this.urlAPI}/user`, this.user)
         .then((response) => {
           let newAllUsers = this.allUsers.concat(response.data.data);
           this.$emit("close", false);
           this.sendNewData(newAllUsers);
+          this.$emit("userEmpty", initialUser);
         })
         .catch((error) => {
           console.log(error);
@@ -184,13 +184,14 @@ export default {
         });
         this.idToUpdate = "";
         this.$emit("close", false);
+        this.$emit("userEmpty", initialUser);
       } catch (error) {
         console.log(error);
       }
     },
     closeModal() {
       this.$emit("close", false); //Change value child to parend type-boolean
-        this.user= ''
+      this.$emit("userEmpty", initialUser);
     },
     sendNewData(newData) {
       this.$emit("getNewData", newData); //Change value child to parend type-array
