@@ -151,6 +151,14 @@ export default {
           let newAllUsers = this.allUsers.concat(response.data.data);
           this.$emit("close", false);
           this.sendNewData(newAllUsers);
+          this.user = {
+            name: "",
+            lastname: "",
+            nickname: "",
+            age: "",
+            email: "",
+            password: "",
+          };
         })
         .catch((error) => {
           console.log(error);

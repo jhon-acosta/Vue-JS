@@ -62,10 +62,11 @@
               >
                 <i
                   class="far fa-edit fa-lg px-2 cursor-pointer text-yellow-500"
+                  @click="updateUser(user)"         
                 ></i>
                 <i
                   class="far fa-trash-alt fa-lg cursor-pointer text-red-600"
-                  v-on:click="deleteUser(user.id)"
+                  @click="deleteUser(user.id)"
                 ></i>
               </td>
             </tr>
@@ -73,11 +74,11 @@
         </table>
       </div>
       <CreateUsers
-        v-on:close="handleClose($event)"
-        v-on:getNewData="handleUsers($event)"
+        @close="handleClose($event)"
+        @getNewData="handleUsers($event)"
         :showModal="showModal"
         :urlAPI="urlAPI"
-        v-bind:allUsers="data"
+        :allUsers="data"
       />
     </div>
   </div>
