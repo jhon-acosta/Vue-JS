@@ -62,7 +62,7 @@
               >
                 <i
                   class="far fa-edit fa-lg px-2 cursor-pointer text-yellow-500"
-                  @click="updateUser(user)"         
+                  @click="sendUserUpdate(user)"
                 ></i>
                 <i
                   class="far fa-trash-alt fa-lg cursor-pointer text-red-600"
@@ -79,6 +79,7 @@
         :showModal="showModal"
         :urlAPI="urlAPI"
         :allUsers="data"
+        :userToUpdata="userToUpdata"
       />
     </div>
   </div>
@@ -97,26 +98,35 @@ export default {
     return {
       urlAPI: "https://arcade-game-v2.herokuapp.com/api",
       data: [],
+      userToUpdata: {
+        name: "",
+        lastname: "",
+        nickname: "",
+        age: "",
+        email: "",
+        password: "",
+      },
       showModal: false,
     };
   },
   methods: {
-    getUser() {
-      axios.get(`${this.urlAPI}/users`).then((response) => {
+    async getUser() {
+      await axios.get(`${this.urlAPI}/users`).then((response) => {
         this.data = response.data.data;
-        // console.log(this.data);
       });
     },
-    deleteUser(userId) {
-      axios
-        .delete(`${this.urlAPI}/user/${userId}`)
-        .then((response) => {
-          console.log(response);
-          this.getUser();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    async deleteUser(userId) {
+      try {
+        await axios.delete(`${this.urlAPI}/user/${userId}`);
+        this.getUser();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    sendUserUpdate(data) {
+      this.userToUpdata = data;
+      this.showModal = true;
+      // console.log(this.userToUpdata);
     },
     handleClose(showModal) {
       this.showModal = showModal;

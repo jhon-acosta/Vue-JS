@@ -20,7 +20,7 @@
         <div class="flex p-5 items-center justify-center">
           <div>
             <h1 class="uppercase font-semibold pb-5 text-center">
-              REGISTRAR USUARIO
+              {{ titleModal }}
             </h1>
             <div class="flex">
               <div class="px-2">
@@ -106,7 +106,7 @@
           <button
             type="button"
             class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-700 hover:text-green-700 text-base font-medium text-white hover:bg-white hover:border-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-700 sm:ml-3 sm:w-auto sm:text-sm"
-            v-on:click="postUsers"
+            v-on:click="postUpdate"
           >
             Guardar
           </button>
@@ -130,6 +130,17 @@ export default {
     showModal: Boolean,
     urlAPI: String,
     allUsers: Array,
+    userToUpdata: Object,
+  },
+  beforeUpdate() {
+    this.user = this.userToUpdata;
+    this.idToUpdate = this.userToUpdata.id;
+    if(this.idToUpdate !== undefined){
+    this.titleModal = "ACTUALIZAR USUARIO";
+    }else{
+      this.titleModal = "REGISTRAR USUARIO";
+    }
+
   },
   data() {
     return {
@@ -141,31 +152,45 @@ export default {
         email: "",
         password: "",
       },
+      idToUpdate: "",
+      titleModal: "REGISTRAR USUARIO",
     };
   },
   methods: {
-    async postUsers() {
+    postUpdate() {
+      if (this.idToUpdate == undefined) {
+        this.postUser();
+      } else {
+        this.updateUser();
+      }
+    },
+    async postUser() {
+      this.titleModal = "REGISTRAR";
       await axios
         .post(`${this.urlAPI}/user`, this.user)
         .then((response) => {
           let newAllUsers = this.allUsers.concat(response.data.data);
           this.$emit("close", false);
           this.sendNewData(newAllUsers);
-          this.user = {
-            name: "",
-            lastname: "",
-            nickname: "",
-            age: "",
-            email: "",
-            password: "",
-          };
         })
         .catch((error) => {
           console.log(error);
         });
     },
+    async updateUser() {
+      try {
+        await axios.put(`${this.urlAPI}/user/${this.idToUpdate}`, {
+          ...this.user,
+        });
+        this.idToUpdate = "";
+        this.$emit("close", false);
+      } catch (error) {
+        console.log(error);
+      }
+    },
     closeModal() {
       this.$emit("close", false); //Change value child to parend type-boolean
+        this.user= ''
     },
     sendNewData(newData) {
       this.$emit("getNewData", newData); //Change value child to parend type-array
