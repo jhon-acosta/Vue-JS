@@ -7,6 +7,7 @@ Vue.use(VueRouter)
 const routes = [
   { path: '/', name: 'Home', component: Home },
   { path: '/user-registration', name: 'ListUsers', component: () => import('../views/system/process/ListUsers') },
+  { path: '/parent', name: 'Parent', component: () => import('../views/system/test/Parent') },
 
 
 ]
