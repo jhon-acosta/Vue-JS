@@ -1,7 +1,7 @@
 ## Development Environment
 
 ```python
-Tools MEAVN:
+Tools MEVN:
   -> Mongo Database
   -> Express
   -> Vue.js
